@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+	<!-- This meta tag ensures that the toolbar at the bottom of the browser
+		is hidden when this page is accessed frome the Home Screen. -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- pecify how the iPhone's status bar should be displayed: -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+	<title>ImpactJS</title>
+	<style type="text/css">
+		body, html {
+			margin: 0; padding: 0; background: #000
+		}
+		.container {
+			position: relative;
+			width: 640px;
+			margin: 0 auto
+		}
+		#canvas {
+			/* Remember, those 320 "px" will be displayed over 640 pixels
+			on the iPhone 4's screen, that's why we have to render
+			the game at 640x640 pixels. */
+
+/*
+			position: relative;
+
+			width: 640px;
+			height: 480px;
+*/
+			border: 1px solid white;
+			display: block; margin: 0 auto;
+		}
+		.button {
+			background-image: url(media/iphone-buttons.png);
+			background-repeat: no-repeat;
+			width: 80px;
+			height: 96px;
+			position: absolute;
+			bottom: 0px;
+
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			-webkit-text-size-adjust: none;
+		}
+		#buttonLeft { left: 0; background-position: 0, 0; }
+		#buttonRight { left: 80px; background-position: -80px, 0; }
+		#buttonDown { right: 80px; background-position: -160px, 0; }
+		#buttonUp { right: 0px; background-position: -240px, 0; }
+	</style>
+</head>
+<body>
+	<!--<div class="container">-->
+    	<canvas id="canvas"></canvas>
+	<!--</div>-->
+
+	<div class="button" id="buttonLeft"></div>
+	<div class="button" id="buttonRight"></div>
+	<div class="button" id="buttonDown"></div>
+	<div class="button" id="buttonUp"></div>
+
+    <script src="lib/impact/impact.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/game/main.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
