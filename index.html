@@ -17,17 +17,14 @@
 		body, html {
 			margin: 0; padding: 0; background: #000
 		}
-		.container {
-			position: relative;
-			width: 640px;
-			margin: 0 auto
-		}
+
 		#canvas {
 			/* Remember, those 320 "px" will be displayed over 640 pixels
 			on the iPhone 4's screen, that's why we have to render
 			the game at 640x640 pixels. */
 
-			display: block; margin: 0 auto;
+			display: block;
+			margin: 0 auto;
 		}
 		#pad {
 			display: none
@@ -49,17 +46,34 @@
 		#buttonRight { left: 80px; background-position: -80px, 0; }
 		#buttonDown { right: 80px; background-position: -160px, 0; }
 		#buttonUp { right: 0px; background-position: -240px, 0; }
+
+		#game {
+			/*display: none;*/
+		}
+
+		#upgrade-your-skull-logo {
+			display: none;
+			margin: 0 auto;
+			width: 312px;
+			height: 312px;
+		}
 	</style>
 </head>
 <body>
-	<!--<div class="container">-->
+
+	<div id="logo">
+		<img id="upgrade-your-skull-logo" src="media/upgradeyourskull.jpg">
+	</div>
+
+	<div id="game">
     	<canvas id="canvas"></canvas>
-	<!--</div>-->
-	<div id="pad">
-		<div class="button" id="buttonLeft"></div>
-		<div class="button" id="buttonRight"></div>
-		<div class="button" id="buttonDown"></div>
-		<div class="button" id="buttonUp"></div>
+
+		<div id="pad">
+			<div class="button" id="buttonLeft"></div>
+			<div class="button" id="buttonRight"></div>
+			<div class="button" id="buttonDown"></div>
+			<div class="button" id="buttonUp"></div>
+		</div>
 	</div>
 
     <script src="lib/impact/impact.js" type="text/javascript" charset="utf-8"></script>
