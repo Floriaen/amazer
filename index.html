@@ -18,6 +18,16 @@
 			margin: 0; padding: 0; background: #000
 		}
 
+		#container {
+			position: relative;
+			margin: 0 auto;
+			display: block;
+			top: 40px;
+		}
+
+		#game {
+			display: none;
+		}
 		#canvas {
 			/* Remember, those 320 "px" will be displayed over 640 pixels
 			on the iPhone 4's screen, that's why we have to render
@@ -52,27 +62,30 @@
 		}
 
 		#upgrade-your-skull-logo {
-			display: none;
+			display: block;
 			margin: 0 auto;
+			position: relative;
+			top: 50px;
 			width: 312px;
 			height: 312px;
 		}
 	</style>
 </head>
 <body>
+	<div id="container">
+		<div id="logo">
+			<img id="upgrade-your-skull-logo" src="media/upgradeyourskull.jpg">
+		</div>
 
-	<div id="logo">
-		<img id="upgrade-your-skull-logo" src="media/upgradeyourskull.jpg">
-	</div>
+		<div id="game">
+	    	<canvas id="canvas"></canvas>
 
-	<div id="game">
-    	<canvas id="canvas"></canvas>
-
-		<div id="pad">
-			<div class="button" id="buttonLeft"></div>
-			<div class="button" id="buttonRight"></div>
-			<div class="button" id="buttonDown"></div>
-			<div class="button" id="buttonUp"></div>
+			<div id="pad">
+				<div class="button" id="buttonLeft"></div>
+				<div class="button" id="buttonRight"></div>
+				<div class="button" id="buttonDown"></div>
+				<div class="button" id="buttonUp"></div>
+			</div>
 		</div>
 	</div>
 
