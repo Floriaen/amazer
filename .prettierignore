@@ -1,0 +1,28 @@
+# Build directories
+build/
+.sonar/
+
+# Dependencies
+node_modules/
+
+# ImpactJS engine (third-party)
+lib/impact/
+
+# ImpactJS plugins (third-party)
+lib/plugins/
+
+# ImpactJS level editor (third-party)
+lib/weltmeister/
+
+# Generated level files (auto-generated JSON)
+lib/game/levels/
+
+# Tools
+tools/
+
+# Media files
+media/
+
+# Other
+*.min.js
+*.bundle.js

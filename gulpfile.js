@@ -1,29 +1,56 @@
-var gulp = require('gulp');
-var exec = require('child_process').exec;
+const gulp = require('gulp');
+const { exec } = require('child_process');
+require('dotenv').config();
 
-gulp.task('default', ['build']);
-gulp.task('deploy', ['deploy:website']);
-
-gulp.task('build', function(cb) {
+// Build task - minifies and bundles the game
+function build(cb) {
 	exec('cd build && ./../tools/bake.sh && cd ../', function (err, stdout, stderr) {
-		//console.log(stdout);
-		console.log(stderr);
+		if (stdout) console.log(stdout);
+		if (stderr) console.log(stderr);
 		cb(err);
 	});
-});
+}
 
-gulp.task('deploy:website', ['build'], function(cb) {
-	exec('rsync -avz ./build/ root@178.32.221.125:/home/floriaen/www/amazer', function (err, stdout, stderr) {
-		console.log(stdout);
-		console.log(stderr);
-		cb(err);
-	});
-});
+// Deploy to website - uses environment variables for security
+function deployWebsite(cb) {
+	const deployUser = process.env.DEPLOY_USER || 'deploy';
+	const deployHost = process.env.DEPLOY_HOST;
+	const deployPath = process.env.DEPLOY_PATH;
 
-gulp.task('deploy:itchio', ['build'], function(cb) {
-	exec('~/Dropbox/game/tools/itch.io.sh build upgradeyourskull/amazer:html5', function (err, stdout, stderr) {
-		console.log(stdout);
-		console.log(stderr);
+	if (!deployHost || !deployPath) {
+		console.error('ERROR: DEPLOY_HOST and DEPLOY_PATH must be set in .env file');
+		console.error('Example: DEPLOY_HOST=example.com DEPLOY_PATH=/var/www/amazer');
+		return cb(new Error('Missing deployment configuration'));
+	}
+
+	const deployCommand = `rsync -avz ./build/ ${deployUser}@${deployHost}:${deployPath}`;
+	console.log(`Deploying to: ${deployUser}@${deployHost}:${deployPath}`);
+
+	exec(deployCommand, function (err, stdout, stderr) {
+		if (stdout) console.log(stdout);
+		if (stderr) console.log(stderr);
 		cb(err);
 	});
-});
+}
+
+// Deploy to itch.io
+function deployItchio(cb) {
+	const itchioPath = process.env.ITCHIO_TOOL_PATH || '~/Dropbox/game/tools/itch.io.sh';
+	const itchioTarget = process.env.ITCHIO_TARGET || 'upgradeyourskull/amazer:html5';
+
+	const deployCommand = `${itchioPath} build ${itchioTarget}`;
+	console.log(`Deploying to itch.io: ${itchioTarget}`);
+
+	exec(deployCommand, function (err, stdout, stderr) {
+		if (stdout) console.log(stdout);
+		if (stderr) console.log(stderr);
+		cb(err);
+	});
+}
+
+// Task definitions
+gulp.task('build', build);
+gulp.task('deploy:website', gulp.series(build, deployWebsite));
+gulp.task('deploy:itchio', gulp.series(build, deployItchio));
+gulp.task('deploy', gulp.series('deploy:website'));
+gulp.task('default', gulp.series('build'));

@@ -1,0 +1,56 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "script"
+  },
+  "globals": {
+    "ig": "readonly",
+    "AmazerGame": "writable",
+    "Map": "writable",
+    "MapEntity": "writable",
+    "MapFloor": "writable",
+    "Man": "writable",
+    "Clouds": "writable",
+    "MovingWall": "writable",
+    "Stairs": "writable"
+  },
+  "rules": {
+    "no-console": "off",
+    "no-unused-vars": ["warn", { "args": "none", "varsIgnorePattern": "^_" }],
+    "no-undef": "error",
+    "no-redeclare": "error",
+    "eqeqeq": ["warn", "always"],
+    "curly": ["warn", "all"],
+    "brace-style": ["warn", "1tbs"],
+    "semi": ["warn", "always"],
+    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "prefer-arrow-callback": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "**/*.spec.js"],
+      "env": {
+        "jest": true
+      },
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"]
+    },
+    {
+      "files": ["gulpfile.js"],
+      "env": {
+        "node": true
+      }
+    }
+  ]
+}
